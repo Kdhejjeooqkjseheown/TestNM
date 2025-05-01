@@ -32,9 +32,6 @@ class NonMetal(BaseSharedPatchSet):
         return {
             "Non-Metal Common": {
                 PatchType.OVERWRITE_SYSTEM_VOLUME: {
-                    "/System/Library/Extensions": {
-                        "IOSurface.kext": "10.15.7",
-                    },
                     "/System/Applications": {
                         **({ "Photo Booth.app": "11.7.9"} if self._xnu_major >= os_data.monterey else {}),
                     },
@@ -50,30 +47,6 @@ class NonMetal(BaseSharedPatchSet):
                 PatchType.REMOVE_SYSTEM_VOLUME: {
                     "/System/Library/Extensions": [
                         "AMDRadeonX4000.kext",
-                        "AMDRadeonX4000HWServices.kext",
-                        "AMDRadeonX5000.kext",
-                        "AMDRadeonX5000HWServices.kext",
-                        "AMDRadeonX6000.kext",
-                        "AMDRadeonX6000Framebuffer.kext",
-                        "AMDRadeonX6000HWServices.kext",
-                        "AppleIntelBDWGraphics.kext",
-                        "AppleIntelBDWGraphicsFramebuffer.kext",
-                        "AppleIntelCFLGraphicsFramebuffer.kext",
-                        "AppleIntelHD4000Graphics.kext",
-                        "AppleIntelHD5000Graphics.kext",
-                        "AppleIntelICLGraphics.kext",
-                        "AppleIntelICLLPGraphicsFramebuffer.kext",
-                        "AppleIntelKBLGraphics.kext",
-                        "AppleIntelKBLGraphicsFramebuffer.kext",
-                        "AppleIntelSKLGraphics.kext",
-                        "AppleIntelSKLGraphicsFramebuffer.kext",
-                        "AppleIntelFramebufferAzul.kext",
-                        "AppleIntelFramebufferCapri.kext",
-                        "AppleParavirtGPU.kext",
-                        "GeForce.kext",
-                        "IOAcceleratorFamily2.kext",
-                        "IOGPUFamily.kext",
-                        "AppleAfterburner.kext",
                     ],
                     "/System/Library/ExtensionKit/Extensions/": [
                         "WallpaperMacintoshExtension.appex"
@@ -89,7 +62,6 @@ class NonMetal(BaseSharedPatchSet):
                     "/System/Library/Frameworks": {
                         "OpenGL.framework":       "10.14.3",
                         "CoreDisplay.framework": f"10.14.4-{self._xnu_major}",
-                        "IOSurface.framework":   f"10.15.7-{self._xnu_major}",
                         "QuartzCore.framework":  f"10.15.7-{self._xnu_major}",
                     },
                     "/System/Library/PrivateFrameworks": {
