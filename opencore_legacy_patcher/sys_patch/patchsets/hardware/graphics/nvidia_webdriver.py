@@ -7,9 +7,6 @@ from ..base import BaseHardware, HardwareVariant, HardwareVariantGraphicsSubclas
 from ...base import PatchType
 
 from ...shared_patches.non_metal             import NonMetal
-from ...shared_patches.monterey_webkit       import MontereyWebKit
-from ...shared_patches.non_metal_ioaccel     import NonMetalIOAccelerator
-from ...shared_patches.non_metal_coredisplay import NonMetalCoreDisplay
 from ...shared_patches.non_metal_enforcement import NonMetalEnforcement
 
 from .....constants  import Constants
@@ -36,13 +33,7 @@ class NvidiaWebDriver(BaseHardware):
         """
         Targeting Nvidia Fermi, Maxwell, Pascal GPUs
         """
-        return self._is_gpu_architecture_present(
-            gpu_architectures=[
-                device_probe.NVIDIA.Archs.Fermi,
-                device_probe.NVIDIA.Archs.Maxwell,
-                device_probe.NVIDIA.Archs.Pascal,
-            ]
-        )
+        return True
 
 
     def native_os(self) -> bool:
@@ -156,9 +147,5 @@ class NvidiaWebDriver(BaseHardware):
 
         return {
             **NonMetal(self._xnu_major, self._xnu_minor, self._os_build).patches(),
-            **NonMetalIOAccelerator(self._xnu_major, self._xnu_minor, self._os_build).patches(),
-            **NonMetalCoreDisplay(self._xnu_major, self._xnu_minor, self._os_build).patches(),
-            **MontereyWebKit(self._xnu_major, self._xnu_minor, self._os_build).patches(),
-            **self._model_specific_patches(),
             **NonMetalEnforcement(self._xnu_major, self._xnu_minor, self._os_build).patches(),
         }
